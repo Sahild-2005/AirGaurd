@@ -1,0 +1,309 @@
+/* --- MODERN UI GLOBAL VARS --- */
+:root {
+    --color-primary: #5c6bc0; /* Indigo/Blue for main action */
+    --color-primary-dark: #3f51b5;
+    --color-text-light: #f0f4f8; /* Light gray for main text */
+    --color-text-dark: #a9adb4; /* Gray for secondary text */
+    --color-bg-main: #1e1e2d; /* Dark Navy/Purple for main background */
+    --color-bg-card: #2a2a3e; /* Slightly lighter dark for cards */
+    --radius-lg: 18px;
+
+    /* AQI Colors - Modern, vibrant tones */
+    --aqi-good: #69F0AE;
+    --aqi-moderate: #FFEB3B;
+    --aqi-unhealthy-sensitive: #FF9800;
+    --aqi-unhealthy: #F44336;
+    --aqi-very-unhealthy: #9C27B0;
+    --aqi-hazardous: #795548;
+}
+
+/* GLOBAL RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Ensuring Inter is used */
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: var(--color-bg-main);
+    color: var(--color-text-light);
+    min-height: 100vh; /* Full height */
+}
+
+/* SCROLLBAR (A cool modern detail) */
+body::-webkit-scrollbar {
+    width: 8px;
+}
+body::-webkit-scrollbar-thumb {
+    background: var(--color-bg-card);
+    border-radius: 4px;
+}
+body::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+}
+
+
+/* --- NAVBAR --- */
+.navbar {
+    width: 100%;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2a2a3ecc; /* Semi-transparent dark card color */
+    backdrop-filter: blur(12px); /* Stronger blur */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800; /* Bolder logo */
+    letter-spacing: -0.5px;
+}
+.logo span {
+    color: var(--color-primary);
+    font-weight: 500; /* Lighter secondary text */
+    font-size: 1.1rem;
+    margin-left: 5px;
+}
+
+.navbar a {
+    margin-left: 25px;
+    text-decoration: none;
+    font-size: 1rem;
+    color: var(--color-text-dark);
+    transition: 0.3s;
+    padding: 5px 0; /* Better clickable area */
+}
+.navbar a:hover {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+
+/* --- SEARCH BAR --- */
+.search-section {
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-section input {
+    width: 400px;
+    padding: 14px 20px;
+    /* Subtle inner shadow for depth */
+    background: var(--color-bg-main); 
+    border: 1px solid #444; 
+    border-radius: var(--radius-lg);
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+    outline: none;
+    transition: border-color 0.3s;
+}
+.search-section input::placeholder {
+    color: var(--color-text-dark);
+}
+.search-section input:focus {
+    border-color: var(--color-primary);
+}
+
+.search-section button {
+    padding: 14px 25px;
+    border-radius: var(--radius-lg);
+    border: none;
+    /* Cool Gradient Background */
+    background: linear-gradient(45deg, var(--color-primary), #7986cb);
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(92, 107, 192, 0.4);
+}
+.search-section button:hover {
+    box-shadow: 0 6px 15px rgba(92, 107, 192, 0.6);
+    transform: translateY(-2px);
+}
+
+/* --- PAGE LAYOUT & MAP --- */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: 30px;
+    padding: 0 40px 40px;
+}
+
+.map-container {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* Stronger shadow for depth */
+    border: 1px solid #333; /* Subtle border */
+}
+#map {
+    width: 100%;
+    height: 650px; /* Slightly taller map */
+}
+
+/* --- RIGHT SIDE PANEL --- */
+.info-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* CARD DESIGN */
+.card {
+    background: var(--color-bg-card);
+    padding: 25px;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid #333; /* Subtle border */
+}
+.card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+.card h3 {
+    color: var(--color-text-light);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333; /* Separator */
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+
+/* --- AQI BADGE (The main focus) --- */
+.aqi-badge {
+    width: 160px; /* Larger */
+    height: 160px;
+    border-radius: 50%;
+    /* Default color (will be overridden by JS) */
+    background: var(--aqi-good); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto; /* Center the badge */
+    color: var(--color-bg-card); /* Dark text on the badge for contrast */
+    font-size: 2.5rem;
+    font-weight: 800;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+#aqiIndex {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.aqi-badge p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- PM & POLLUTANTS --- */
+.pm25-box {
+    background: var(--color-bg-main);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.pm25-box span {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+ul {
+    margin-top: 10px;
+    padding-left: 0;
+    list-style: none; /* Remove default dots */
+}
+ul li {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    color: var(--color-text-dark);
+    display: flex;
+    align-items: center;
+}
+ul li::before {
+    content: "•";
+    color: var(--color-primary);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+/* TOP 10 LIST */
+#top10 {
+    list-style: decimal-leading-zero; /* 01, 02, 03... */
+    padding-left: 25px;
+    color: var(--color-text-dark);
+}
+
+#top10 li {
+    margin: 10px 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#top10 li:hover {
+    color: var(--color-primary);
+    transform: translateX(5px);
+}
+
+
+/* --- CHART STYLING --- */
+#historyChart {
+    background: var(--color-bg-main);
+    padding: 15px;
+    border-radius: 12px;
+}
+
+/* --- RESPONSIVE --- */
+@media(max-width: 950px) {
+    .main-grid {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 20px;
+    }
+    #map {
+        height: 400px;
+    }
+    .search-section input {
+        width: 100%;
+    }
+}
+@media(max-width: 600px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+    .main-grid {
+        padding: 15px;
+    }
+}
+
+/* Utility Classes for JS to control AQI color */
+.aqi-good { background: var(--aqi-good); color: var(--color-bg-card); }
+.aqi-moderate { background: var(--aqi-moderate); color: var(--color-bg-main); }
+.aqi-unhealthy-sensitive { background: var(--aqi-unhealthy-sensitive); color: var(--color-bg-card); }
+.aqi-unhealthy { background: var(--aqi-unhealthy); color: var(--color-text-light); }
+.aqi-very-unhealthy { background: var(--aqi-very-unhealthy); color: var(--color-text-light); }
+.aqi-hazardous { background: var(--aqi-hazardous); color: var(--color-text-light); }
