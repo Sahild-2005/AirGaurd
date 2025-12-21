@@ -20,7 +20,7 @@ async function searchCity() {
     }
 
     try {
-        // 1️⃣ Get geo location
+        // 1️1. Get geo location
         const geoRes = await fetch(`/api/geo?city=${city}`);
         const geoData = await geoRes.json();
 
@@ -32,7 +32,7 @@ async function searchCity() {
         const { lat, lon, name } = geoData[0];
         map.setView([lat, lon], 11);
 
-        // 2️⃣ Get AQI data
+        // 2️. Get AQI data
         const aqiRes = await fetch(`/api/aqi?lat=${lat}&lon=${lon}`);
         const aqiData = await aqiRes.json();
         const aqiInfo = aqiData.list[0];
@@ -40,18 +40,18 @@ async function searchCity() {
         const aqi = aqiInfo.main.aqi;
         const pm25 = aqiInfo.components.pm2_5;
 
-        // 3️⃣ Show details panel
+        // 3️ Show details panel
         document.getElementById("details").classList.remove("hidden");
 
         document.getElementById("cityName").innerText = name;
         document.getElementById("aqiIndex").innerText = aqi;
         document.getElementById("pm25").innerText = pm25.toFixed(1);
 
-        // 4️⃣ Cigarette equivalent (WHO approx)
+        // 4️ Cigarette equivalent (WHO approx)
         const cigarettes = (pm25 / 22).toFixed(1);
         document.getElementById("cigs").innerText = cigarettes;
 
-        // 5️⃣ AQI category + color
+        // 5️ AQI category + color
         const badge = document.getElementById("aqiBadge");
         const category = document.getElementById("aqiCategory");
 
@@ -74,7 +74,7 @@ async function searchCity() {
             badge.classList.add("severe");
         }
 
-        // 6️⃣ Pollutants list
+        // 6️ Pollutants list
         const pollutants = aqiInfo.components;
         const list = document.getElementById("pollutantList");
         list.innerHTML = "";
@@ -85,7 +85,7 @@ async function searchCity() {
             list.appendChild(li);
         }
 
-        // 7️⃣ Map marker
+        // 7️ Map marker
         L.marker([lat, lon])
             .addTo(map)
             .bindPopup(`<b>${name}</b><br>AQI: ${aqi}`)
