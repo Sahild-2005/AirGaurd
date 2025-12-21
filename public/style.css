@@ -307,3 +307,10 @@ ul li::before {
 .aqi-unhealthy { background: var(--aqi-unhealthy); color: var(--color-text-light); }
 .aqi-very-unhealthy { background: var(--aqi-very-unhealthy); color: var(--color-text-light); }
 .aqi-hazardous { background: var(--aqi-hazardous); color: var(--color-text-light); }
+
+
+.good { background: #a8e05f; }
+.moderate { background: #fdd64b; }
+.poor { background: #ff9b57; }
+.unhealthy { background: #fe6a69; }
+.severe { background: #a87383; }
